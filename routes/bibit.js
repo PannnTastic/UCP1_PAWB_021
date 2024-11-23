@@ -1,10 +1,10 @@
 const express = require('express')
 
 const router = express.Router();
-const 
+
 
 // Mockup data Bibit
- bibit = [
+let bibit = [
   { id: 1, nama: 'Bibit Padi', jenis: 'Ciherang' },
   { id: 2, nama: 'Bibit Jagung', jenis: 'Bisi 2' },
 ];
@@ -21,10 +21,10 @@ router.get('/add', (req, res) => {
 
 // Menambahkan Bibit
 router.post('/add', (req, res) => {
-  const { nama, varietas } = req.body;
-  const newBibit = { id: bibit.length + 1, nama, varietas };
+  const { nama, jenis } = req.body;
+  const newBibit = { id: bibit.length + 1, nama, jenis };
   bibit.push(newBibit);
-  res.redirect('/bibit/mock');
+  res.redirect('/bibit');
 });
 
 // Form edit Bibit
@@ -35,18 +35,18 @@ router.get('/edit/:id', (req, res) => {
 
 // Mengedit Bibit
 router.post('/edit/:id', (req, res) => {
-  const { nama, varietas } = req.body;
+  const { nama, jenis } = req.body;
   const index = bibit.findIndex(b => b.id === parseInt(req.params.id));
   if (index !== -1) {
-    bibit[index] = { id: parseInt(req.params.id), nama, varietas };
+    bibit[index] = { id: parseInt(req.params.id), nama, jenis };
   }
-  res.redirect('/bibit/mock');
+  res.redirect('/bibit');
 });
 
 // Menghapus Bibit
 router.get('/delete/:id', (req, res) => {
   bibit = bibit.filter(b => b.id !== parseInt(req.params.id));
-  res.redirect('/bibit/mock');
+  res.redirect('/bibit');
 });
 
 module.exports = router;
